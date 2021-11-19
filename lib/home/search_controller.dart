@@ -64,6 +64,9 @@ class SearchController {
           for (Map<String, dynamic> yexterResult in module['results']) {
             YexterContent yexterContent =
                 YexterContent.fromJson(yexterResult['data']);
+                if (!yexterContent.isActive) {
+                  continue;
+                }
             results.add(SearchResult.yexter(yexterContent));
           }
         }
