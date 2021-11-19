@@ -11,21 +11,30 @@ class SearchContent extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> items = [];
     SearchResults results = _results ?? SearchResults.notAvailable();
-    if (results.status == SearchResultStatus.LOADING) {
-      items.add(ContentSkeleton(
-        columnCount: 4,
-        height: 125,
-      ));
-      items.add(ContentSkeleton());
-      items.add(ContentSkeleton());
-      items.add(ContentSkeleton(columnCount: 2));
-      items.add(ContentSkeleton());
-      items.add(ContentSkeleton(columnCount: 2));
-      items.add(ContentSkeleton());
-      items.add(ContentSkeleton());
-      items.add(ContentSkeleton());
-      items.add(ContentSkeleton());
-      items.add(ContentSkeleton());
+    switch (results.status) {
+      case SearchResultStatus.LOADING:
+        items.add(ContentSkeleton(
+          columnCount: 4,
+          height: 125,
+        ));
+        items.add(ContentSkeleton());
+        items.add(ContentSkeleton());
+        items.add(ContentSkeleton(columnCount: 2));
+        items.add(ContentSkeleton());
+        items.add(ContentSkeleton(columnCount: 2));
+        items.add(ContentSkeleton());
+        items.add(ContentSkeleton());
+        items.add(ContentSkeleton());
+        items.add(ContentSkeleton());
+        items.add(ContentSkeleton());
+        break;
+      case SearchResultStatus.AVAILABLE:
+        for (SearchResult searchResult in results.results) {
+          print(searchResult);
+        }
+        break;
+      default:
+        break;
     }
     bool missing = results.status == SearchResultStatus.NOT_AVAILABLE;
     bool hidden = missing || results.status == SearchResultStatus.ANIMATING;

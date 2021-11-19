@@ -1,3 +1,5 @@
+import 'package:telescope/home/yexter_content.dart';
+
 enum SearchResultStatus {
   NOT_AVAILABLE,
   ANIMATING,
@@ -9,6 +11,7 @@ class SearchResults {
   final SearchResultStatus _status;
   final List<SearchResult> _results;
   SearchResults(this._results) : _status = SearchResultStatus.AVAILABLE;
+  SearchResults.fromResponse(String response) : _status = SearchResultStatus.AVAILABLE, _results = [];
   SearchResults.notAvailable()
       : _status = SearchResultStatus.NOT_AVAILABLE,
         _results = [];
@@ -24,8 +27,8 @@ class SearchResults {
 }
 
 class SearchResult {
-  final String _content;
-  SearchResult(this._content);
+  final YexterContent? _yexterContent;
+  SearchResult.yexter(this._yexterContent);
 
-  String get content => _content;
+  YexterContent? get yexterContent => _yexterContent;
 }

@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:telescope/home/search_results.dart';
+import 'package:telescope/home/yexter_content.dart';
 import 'package:telescope/secure/constants.dart';
 import 'package:http/http.dart' as http;
 
@@ -51,13 +53,25 @@ class SearchController {
       }
     }
     http.get(Uri.parse(request)).then((response) {
+      List<SearchResult> results = [];
       if (response.statusCode == 200) {
-        print(response.body);
+        Map<String, dynamic> responseJson = jsonDecode(response.body);
+        List<dynamic> modules = responseJson['response']['modules'];
+        for (dynamic module in modules) {
+          if (module['verticalConfigId'] != 'yexters') {
+            continue;
+          }
+          for (Map<String, dynamic> yexterResult in module['results']) {
+            YexterContent yexterContent =
+                YexterContent.fromJson(yexterResult['data']);
+            results.add(SearchResult.yexter(yexterContent));
+          }
+        }
       } else {
         throw Exception(
             'Failed to perform search\nStatus Code = ${response.statusCode}\nBody = ${response.body}');
       }
-      _resultSubject.add(SearchResults([]));
+      _resultSubject.add(SearchResults(results));
     });
   }
 
