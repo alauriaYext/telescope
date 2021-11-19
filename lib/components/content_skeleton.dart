@@ -57,19 +57,10 @@ class ContentSkeletonState extends State<ContentSkeleton>
       child: Container(
         height: widget._height,
         decoration: BoxDecoration(
-          color: Palette.gray7,
+          color: Palette.gray2,
           borderRadius: BorderRadius.circular(10),
         ),
       ),
     );
-    // return Container(
-    //   width: widget.width,
-    //   height: widget.height,
-    //   decoration: BoxDecoration(
-    //       gradient: LinearGradient(
-    //           begin: Alignment(gradientPosition!.value, 0),
-    //           end: Alignment(-1, 0),
-    //           colors: [Colors.black12, Colors.black26, Colors.black12])),
-    // );
   }
 }

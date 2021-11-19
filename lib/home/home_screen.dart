@@ -57,7 +57,7 @@ class HomeScreen extends StatelessWidget {
                     return AnimatedContainer(
                       duration: Duration(
                           milliseconds: SearchController.animationDuration),
-                      height: isAvailable ? maxHeight * 0.7 : 0,
+                      height: isAvailable ? maxHeight * 0.725 : 0,
                       child: isAvailable
                           ? SearchContent(results: snapshot.data)
                           : Container(),

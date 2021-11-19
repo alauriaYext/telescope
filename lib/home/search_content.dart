@@ -71,6 +71,6 @@ class SearchContent extends StatelessWidget {
     if (currentRowItems.length > 0) {
       rows.add(Row(children: currentRowItems));
     }
-    return Column(children: rows);
+    return ListView(children: [ Column(children: rows)]);
   }
 }
