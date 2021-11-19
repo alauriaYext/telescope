@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:telescope/cards/search_result_card.dart';
 import 'package:telescope/components/content_skeleton.dart';
 import 'package:telescope/home/search_controller.dart';
 import 'package:telescope/home/search_results.dart';
@@ -9,31 +10,17 @@ class SearchContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> items = [];
+    Widget content;
     SearchResults results = _results ?? SearchResults.notAvailable();
     switch (results.status) {
       case SearchResultStatus.LOADING:
-        items.add(ContentSkeleton(
-          columnCount: 4,
-          height: 125,
-        ));
-        items.add(ContentSkeleton());
-        items.add(ContentSkeleton());
-        items.add(ContentSkeleton(columnCount: 2));
-        items.add(ContentSkeleton());
-        items.add(ContentSkeleton(columnCount: 2));
-        items.add(ContentSkeleton());
-        items.add(ContentSkeleton());
-        items.add(ContentSkeleton());
-        items.add(ContentSkeleton());
-        items.add(ContentSkeleton());
+        content = buildLoadingContent();
         break;
       case SearchResultStatus.AVAILABLE:
-        for (SearchResult searchResult in results.results) {
-          print(searchResult);
-        }
+        content = buildResultContent(results);
         break;
       default:
+        content = Container();
         break;
     }
     bool missing = results.status == SearchResultStatus.NOT_AVAILABLE;
@@ -42,7 +29,48 @@ class SearchContent extends StatelessWidget {
       duration:
           Duration(milliseconds: SearchController.animationDuration ~/ 1.25),
       opacity: hidden ? 0.0 : 1.0,
-      child: ListView(children: items),
+      child: content,
     );
+  }
+
+  Widget buildLoadingContent() {
+    List<Widget> items = [];
+    items.add(ContentSkeleton(
+      columnCount: 4,
+      height: 125,
+    ));
+    items.add(ContentSkeleton());
+    items.add(ContentSkeleton());
+    items.add(ContentSkeleton(columnCount: 2));
+    items.add(ContentSkeleton());
+    items.add(ContentSkeleton(columnCount: 2));
+    items.add(ContentSkeleton());
+    items.add(ContentSkeleton());
+    items.add(ContentSkeleton());
+    items.add(ContentSkeleton());
+    items.add(ContentSkeleton());
+    return ListView(children: items);
+  }
+
+  Widget buildResultContent(SearchResults results) {
+    List<Widget> rows = [];
+    List<Widget> currentRowItems = [];
+    for (SearchResult searchResult in results.results) {
+      SearchResultCard card = SearchResultCard(searchResult);
+      currentRowItems.add(Expanded(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: card,
+        ),
+      ));
+      if (currentRowItems.length == 2) {
+        rows.add(Row(children: currentRowItems));
+        currentRowItems = [];
+      }
+    }
+    if (currentRowItems.length > 0) {
+      rows.add(Row(children: currentRowItems));
+    }
+    return Column(children: rows);
   }
 }

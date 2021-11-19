@@ -25,6 +25,12 @@ class HomeScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Image.asset(
+                      'assets/images/yext_logo_white.jpg',
+                      width: 65,
+                      height: 65,
+                    ),
+                    Container(width: 2.5),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 7),
                       child: SelectableText(
@@ -32,12 +38,6 @@ class HomeScreen extends StatelessWidget {
                         style: TextStyles.header1.offWhite(),
                         textAlign: TextAlign.center,
                       ),
-                    ),
-                    Container(width: 2.5),
-                    Image.asset(
-                      'assets/images/yext_logo_white.jpg',
-                      width: 65,
-                      height: 65,
                     ),
                   ],
                 ),
