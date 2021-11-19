@@ -5,8 +5,7 @@ import 'package:telescope/home/search_results.dart';
 
 class SearchContent extends StatelessWidget {
   final SearchResults? _results;
-  SearchContent({SearchResults? results})
-      : _results = results;
+  SearchContent({SearchResults? results}) : _results = results;
 
   @override
   Widget build(BuildContext context) {
