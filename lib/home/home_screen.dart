@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
     return LayoutBuilder(builder: (_, constraints) {
       double maxHeight = constraints.maxHeight;
       return Container(
-        color: Palette.gray10,
+        color: Palette.black,
         child: Center(
           child: Container(
             constraints: BoxConstraints(maxWidth: 700),
