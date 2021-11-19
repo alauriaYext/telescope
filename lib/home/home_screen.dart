@@ -36,14 +36,16 @@ class HomeScreen extends StatelessWidget {
                 StreamBuilder<SearchResults>(
                   stream: _controller.resultStream,
                   builder: (context, snapshot) {
-                    var status = snapshot.data == null
-                        ? null
-                        : snapshot.data!.status;
+                    bool isAvailable = snapshot.data != null &&
+                        snapshot.data?.status !=
+                            SearchResultStatus.NOT_AVAILABLE;
                     return AnimatedContainer(
                       duration: Duration(
                           milliseconds: SearchController.animationDuration),
-                      height: status == null ? 0 : maxHeight * 0.7,
-                      child: SearchContent(results: snapshot.data),
+                      height: isAvailable ? maxHeight * 0.7 : 0,
+                      child: isAvailable
+                          ? SearchContent(results: snapshot.data)
+                          : Container(),
                     );
                   },
                 ),

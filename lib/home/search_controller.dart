@@ -17,7 +17,7 @@ class SearchController {
       : _queryController = TextEditingController(),
         _focusNode = FocusNode(),
         _querySubject = BehaviorSubject(),
-        _resultSubject = BehaviorSubject() {
+        _resultSubject = BehaviorSubject.seeded(SearchResults.notAvailable()) {
     _focusNode.requestFocus();
   }
 
@@ -25,8 +25,13 @@ class SearchController {
   Stream<SearchResults> get resultStream => _resultSubject.stream;
 
   search(String input) {
-    _resultSubject.add(SearchResults.animating());
-    Timer(Duration(milliseconds: animationDuration), () {
+    int delayMs = 0;
+    if (_resultSubject.valueWrapper?.value.status ==
+        SearchResultStatus.NOT_AVAILABLE) {
+      _resultSubject.add(SearchResults.animating());
+      delayMs = animationDuration;
+    }
+    Timer(Duration(milliseconds: delayMs), () {
       _resultSubject.add(SearchResults.loading());
     });
     String request =
