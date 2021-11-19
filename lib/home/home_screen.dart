@@ -22,14 +22,29 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               children: [
                 Spacer(flex: 45),
-                SelectableText(
-                  title,
-                  style: TextStyles.header1.offWhite(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 7),
+                      child: SelectableText(
+                        title,
+                        style: TextStyles.header1.offWhite(),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    Container(width: 2.5),
+                    Image.asset(
+                      'assets/images/yext_logo_white.jpg',
+                      width: 65,
+                      height: 65,
+                    ),
+                  ],
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16.0,
-                    vertical: 20.0,
+                    vertical: 12.5,
                   ),
                   child: SearchBox(_controller),
                 ),
