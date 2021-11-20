@@ -5,7 +5,7 @@ import 'package:telescope/style_guide/palette.dart';
 import 'package:telescope/style_guide/text_styles.dart';
 
 class YexterCard extends StatelessWidget {
-  final UNKNOWN_IMAGE_URL =
+  static const UNKNOWN_IMAGE_URL =
       'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/1084px-Unknown_person.jpg';
   final YexterContent _content;
   YexterCard(this._content);
@@ -28,61 +28,72 @@ class YexterCard extends StatelessWidget {
                 child: FadeInImage.assetNetwork(
                   image: _content.photoUrl ?? UNKNOWN_IMAGE_URL,
                   placeholder: 'assets/images/unknown_person.jpeg',
-                  width: 140,
-                  height: 140,
+                  width: 165,
+                  height: 165,
                   fadeInDuration: Duration(milliseconds: 75),
                   fadeOutDuration: Duration(milliseconds: 75),
                 ),
               ),
             ),
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: Text(
-                      _content.name,
-                      style: TextStyles.textL.bold(),
-                      overflow: TextOverflow.ellipsis,
+              child: Padding(
+                padding: EdgeInsets.all(5),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Text(
+                        _content.name,
+                        style: TextStyles.textL.bold(),
+                        overflow: TextOverflow.fade,
+                      ),
                     ),
-                  ),
-                  Center(
-                    child: Text(_content.jobTitle,
+                    Center(
+                      child: Text(
+                        _content.jobTitle,
                         style: TextStyles.textXS.offBlack(),
-                        overflow: TextOverflow.ellipsis),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.location_on_sharp,
-                          color: Palette.gray10,
-                          size: 16,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 1, bottom: 1),
-                          child: Text(
-                            _content.officeName ?? 'N/A',
-                            style: TextStyles.textS.offBlack().bold(),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.fade,
+                      ),
                     ),
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      additionalAttribute('team', _content.team),
-                      additionalAttribute('email', _content.email),
-                      additionalAttribute('myers briggs', _content.myersBriggs),
-                      additionalAttribute('manager', _content.managerName),
-                    ],
-                  )
-                ],
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 10, right: 6, top: 10, bottom: 6),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.location_on_sharp,
+                            color: Palette.gray10,
+                            size: 16,
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 1, bottom: 1),
+                              child: Text(
+                                _content.officeName ?? 'N/A',
+                                style: TextStyles.textS.offBlack().bold(),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        additionalAttribute('team', _content.team),
+                        additionalAttribute('email', _content.email),
+                        additionalAttribute(
+                            'myers briggs', _content.myersBriggs),
+                        additionalAttribute('manager', _content.managerName),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ],
@@ -92,17 +103,22 @@ class YexterCard extends StatelessWidget {
   }
 
   Widget additionalAttribute(String label, String? value) {
-    return Row(
-      children: [
-        Container(width: 25),
-        Text('$label: ',
-            style: TextStyles.textXS.bold(), overflow: TextOverflow.ellipsis),
-        Expanded(
-          child: Text(value ?? 'N/A',
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Row(
+        children: [
+          Text('$label: ',
+              style: TextStyles.textXS.bold(), overflow: TextOverflow.ellipsis),
+          Expanded(
+            child: Text(
+              value ?? 'N/A',
               style: TextStyles.textXS.offBlack(),
-              overflow: TextOverflow.ellipsis),
-        ),
-      ],
+              overflow: TextOverflow.fade,
+              maxLines: 1,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

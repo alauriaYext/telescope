@@ -17,8 +17,7 @@ class YexterContent {
         _email = getEmail(json),
         _photoUrl = getPhotoUrl(json),
         _managerName = getManagerName(json),
-        _myersBriggs = json['c_myersBriggs'] ?? null {
-  }
+        _myersBriggs = json['c_myersBriggs'] ?? null {}
 
   String get name => _name;
   String get jobTitle => _jobTitle;
