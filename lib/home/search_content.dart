@@ -1,10 +1,9 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:telescope/cards/search_result_card.dart';
 import 'package:telescope/components/content_skeleton.dart';
 import 'package:telescope/home/search_controller.dart';
 import 'package:telescope/home/search_results.dart';
+import 'package:telescope/device/device_util.dart';
 
 class SearchContent extends StatelessWidget {
   final SearchResults? _results;
@@ -61,7 +60,7 @@ class SearchContent extends StatelessWidget {
   Widget buildResultContent(SearchResults results) {
     List<Widget> rows = [];
     List<Widget> currentRowItems = [];
-    int itemsPerRow = isMobile() ? 1 : 2;
+    int itemsPerRow = DeviceUtil.isMobile() ? 1 : 2;
     for (SearchResult searchResult in results.results) {
       SearchResultCard card = SearchResultCard(searchResult);
       currentRowItems.add(Expanded(
@@ -79,13 +78,5 @@ class SearchContent extends StatelessWidget {
       rows.add(Row(children: currentRowItems));
     }
     return ListView(children: [Column(children: rows)]);
-  }
-
-  bool isMobile() {
-    try {
-      return !Platform.isMacOS && !Platform.isLinux && !Platform.isWindows;
-    } catch (e) {
-      return false;
-    }
   }
 }
