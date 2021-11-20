@@ -28,8 +28,8 @@ class YexterCard extends StatelessWidget {
                 child: FadeInImage.assetNetwork(
                   image: _content.photoUrl ?? UNKNOWN_IMAGE_URL,
                   placeholder: 'assets/images/unknown_person.jpeg',
-                  width: 150,
-                  height: 150,
+                  width: 140,
+                  height: 140,
                   fadeInDuration: Duration(milliseconds: 75),
                   fadeOutDuration: Duration(milliseconds: 75),
                 ),
@@ -37,17 +37,22 @@ class YexterCard extends StatelessWidget {
             ),
             Expanded(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    _content.name,
-                    style: TextStyles.textL.bold(),
-                    overflow: TextOverflow.ellipsis,
+                  Center(
+                    child: Text(
+                      _content.name,
+                      style: TextStyles.textL.bold(),
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                  Text(_content.jobTitle,
-                      style: TextStyles.textXS.offBlack(),
-                      overflow: TextOverflow.ellipsis),
+                  Center(
+                    child: Text(_content.jobTitle,
+                        style: TextStyles.textXS.offBlack(),
+                        overflow: TextOverflow.ellipsis),
+                  ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -67,9 +72,16 @@ class YexterCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  additionalAttribute('email', _content.email),
-                  additionalAttribute('manager', _content.managerName),
-                  additionalAttribute('myers briggs', _content.myersBriggs),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      additionalAttribute('team', _content.team),
+                      additionalAttribute('email', _content.email),
+                      additionalAttribute('myers briggs', _content.myersBriggs),
+                      additionalAttribute('manager', _content.managerName),
+                    ],
+                  )
                 ],
               ),
             ),
@@ -81,13 +93,15 @@ class YexterCard extends StatelessWidget {
 
   Widget additionalAttribute(String label, String? value) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        Container(width: 25),
         Text('$label: ',
             style: TextStyles.textXS.bold(), overflow: TextOverflow.ellipsis),
-        Text(value ?? 'N/A',
-            style: TextStyles.textXS.offBlack(),
-            overflow: TextOverflow.ellipsis),
+        Expanded(
+          child: Text(value ?? 'N/A',
+              style: TextStyles.textXS.offBlack(),
+              overflow: TextOverflow.ellipsis),
+        ),
       ],
     );
   }

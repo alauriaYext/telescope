@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:telescope/cards/search_result_card.dart';
 import 'package:telescope/components/content_skeleton.dart';
@@ -14,7 +16,7 @@ class SearchContent extends StatelessWidget {
     SearchResults results = _results ?? SearchResults.notAvailable();
     switch (results.status) {
       case SearchResultStatus.LOADING:
-        content = buildLoadingContent();
+        content = buildLoadingContent(context);
         break;
       case SearchResultStatus.AVAILABLE:
         content = buildResultContent(results);
@@ -33,7 +35,7 @@ class SearchContent extends StatelessWidget {
     );
   }
 
-  Widget buildLoadingContent() {
+  Widget buildLoadingContent(BuildContext context) {
     List<Widget> items = [];
     items.add(ContentSkeleton(
       columnCount: 4,
@@ -49,12 +51,17 @@ class SearchContent extends StatelessWidget {
     items.add(ContentSkeleton());
     items.add(ContentSkeleton());
     items.add(ContentSkeleton());
-    return ListView(children: items);
+    return MediaQuery.removePadding(
+      context: context,
+      removeTop: true,
+      child: ListView(children: items),
+    );
   }
 
   Widget buildResultContent(SearchResults results) {
     List<Widget> rows = [];
     List<Widget> currentRowItems = [];
+    int itemsPerRow = isMobile() ? 1 : 2;
     for (SearchResult searchResult in results.results) {
       SearchResultCard card = SearchResultCard(searchResult);
       currentRowItems.add(Expanded(
@@ -63,7 +70,7 @@ class SearchContent extends StatelessWidget {
           child: card,
         ),
       ));
-      if (currentRowItems.length == 2) {
+      if (currentRowItems.length == itemsPerRow) {
         rows.add(Row(children: currentRowItems));
         currentRowItems = [];
       }
@@ -71,6 +78,14 @@ class SearchContent extends StatelessWidget {
     if (currentRowItems.length > 0) {
       rows.add(Row(children: currentRowItems));
     }
-    return ListView(children: [ Column(children: rows)]);
+    return ListView(children: [Column(children: rows)]);
+  }
+
+  bool isMobile() {
+    try {
+      return !Platform.isMacOS && !Platform.isLinux && !Platform.isWindows;
+    } catch (e) {
+      return false;
+    }
   }
 }

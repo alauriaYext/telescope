@@ -4,6 +4,7 @@ class YexterContent {
   bool? _isActive;
   String? _photoUrl;
   String? _officeName;
+  String? _team;
   String? _email;
   String? _managerName;
   String? _myersBriggs;
@@ -12,19 +13,11 @@ class YexterContent {
         _jobTitle = json['c_jobTitle'],
         _isActive = json['c_active'],
         _officeName = getOfficeName(json),
+        _team = json['c_team'] ?? null,
         _email = getEmail(json),
         _photoUrl = getPhotoUrl(json),
         _managerName = getManagerName(json),
         _myersBriggs = json['c_myersBriggs'] ?? null {
-    print('=================================');
-    dynamic item = json['emails'];
-    if (item != null) {
-      print('$item');
-    }
-    print('----------------------');
-    for (String key in json.keys) {
-      print(key);
-    }
   }
 
   String get name => _name;
@@ -32,6 +25,7 @@ class YexterContent {
   bool get isActive => _isActive ?? false;
   String? get officeName => _officeName;
   String? get photoUrl => _photoUrl;
+  String? get team => _team;
   String? get email => _email;
   String? get managerName => _managerName;
   String? get myersBriggs => _myersBriggs;
@@ -62,8 +56,6 @@ class YexterContent {
 
   static String? getEmail(Map<String, dynamic> json) {
     List<dynamic> emails = json['emails'] ?? [];
-    print(emails);
-    print(emails);
     if (emails == null || emails.isEmpty) {
       return null;
     }
