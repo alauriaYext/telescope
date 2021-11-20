@@ -14,6 +14,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (_, constraints) {
       double maxHeight = constraints.maxHeight;
+      print('height = $maxHeight');
       return Container(
         color: Palette.black,
         child: Center(

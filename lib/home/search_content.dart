@@ -77,6 +77,11 @@ class SearchContent extends StatelessWidget {
     if (currentRowItems.length > 0) {
       rows.add(Row(children: currentRowItems));
     }
-    return ListView(children: [Column(children: rows)]);
+    return ListView.builder(
+      itemCount: rows.length,
+      itemBuilder: (_, index) {
+        return index < rows.length ? rows[index] : Container();
+      },
+    );
   }
 }

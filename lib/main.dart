@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:telescope/home/home_screen.dart';
 import 'package:telescope/style_guide/palette.dart';
-import 'package:telescope/style_guide/text_styles.dart';
 
 void main() {
   runApp(TelescopeApp());
@@ -23,8 +22,11 @@ class TelescopeApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Container(
-            color: Palette.black, child: SafeArea(child: HomeScreen())),
+          color: Palette.black,
+          child: HomeScreen(),
+        ),
       ),
     );
   }
