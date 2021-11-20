@@ -37,10 +37,7 @@ class SearchContent extends StatelessWidget {
 
   Widget buildLoadingContent(BuildContext context) {
     List<Widget> items = [];
-    items.add(ContentSkeleton(
-      columnCount: 4,
-      height: 155,
-    ));
+    items.add(ContentSkeleton(columnCount: 4));
     items.add(ContentSkeleton());
     items.add(ContentSkeleton());
     items.add(ContentSkeleton(columnCount: 2));

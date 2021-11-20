@@ -5,7 +5,7 @@ class ContentSkeleton extends StatefulWidget {
   final int _columnCount;
   final double _height;
 
-  ContentSkeleton({int columnCount = 1, double height = 175})
+  ContentSkeleton({int columnCount = 1, double height = 167.5})
       : _columnCount = columnCount,
         _height = height;
 
@@ -22,11 +22,13 @@ class ContentSkeletonState extends State<ContentSkeleton>
   void initState() {
     super.initState();
     _controller = AnimationController(
-        duration: Duration(milliseconds: 1500), vsync: this);
+      duration: Duration(milliseconds: 1250),
+      vsync: this,
+    );
 
     gradientPosition = Tween<double>(
-      begin: -3,
-      end: 10,
+      begin: -1,
+      end: 5,
     ).animate(
       CurvedAnimation(parent: _controller!, curve: Curves.linear),
     )..addListener(() {
@@ -57,9 +59,18 @@ class ContentSkeletonState extends State<ContentSkeleton>
       child: Container(
         height: widget._height,
         decoration: BoxDecoration(
-          color: Palette.gray2,
-          borderRadius: BorderRadius.circular(10),
-        ),
+            borderRadius: BorderRadius.circular(10),
+            gradient: LinearGradient(
+                begin: Alignment(gradientPosition?.value ?? 0, 0),
+                end: Alignment(-1, 0),
+                colors: [
+                  Palette.gray2,
+                  Palette.gray3,
+                  Palette.gray4,
+                  Palette.gray5,
+                  Palette.gray4,
+                  Palette.gray3
+                ])),
       ),
     );
   }
