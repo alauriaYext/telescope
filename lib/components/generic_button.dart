@@ -36,8 +36,16 @@ class _GenericButtonState extends State<GenericButton> {
   }
 
   Widget button() {
+    double opacity;
+    if (_isClicked) {
+      opacity = 0.75;
+    } else if (_isHovering) {
+      opacity = 0.85;
+    } else {
+      opacity = 1.0;
+    }
     return Opacity(
-      opacity: _isClicked || _isHovering ? 0.85 : 1.0,
+      opacity: opacity,
       child: GestureDetector(
         onTapDown: (_) {
           setState(() {

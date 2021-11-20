@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:telescope/components/generic_button.dart';
-import 'package:telescope/home/yexter_content.dart';
+import 'package:telescope/cards/yexter_content.dart';
 import 'package:telescope/style_guide/palette.dart';
 import 'package:telescope/style_guide/text_styles.dart';
 
@@ -46,6 +46,7 @@ class YexterCard extends StatelessWidget {
                         _content.name,
                         style: TextStyles.textL.bold(),
                         overflow: TextOverflow.fade,
+                        textAlign: TextAlign.center,
                       ),
                     ),
                     Center(

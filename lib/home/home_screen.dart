@@ -3,6 +3,7 @@ import 'package:telescope/home/search_box.dart';
 import 'package:telescope/home/search_content.dart';
 import 'package:telescope/home/search_controller.dart';
 import 'package:telescope/home/search_results.dart';
+import 'package:telescope/home/settings_bar.dart';
 import 'package:telescope/style_guide/palette.dart';
 import 'package:telescope/style_guide/text_styles.dart';
 
@@ -22,7 +23,13 @@ class HomeScreen extends StatelessWidget {
             constraints: BoxConstraints(maxWidth: 700),
             child: Column(
               children: [
-                Spacer(flex: 45),
+                Expanded(
+                  flex: 35,
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: SettingsBar(),
+                  ),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -65,7 +72,7 @@ class HomeScreen extends StatelessWidget {
                     );
                   },
                 ),
-                Spacer(flex: 55),
+                Spacer(flex: 40),
               ],
             ),
           ),

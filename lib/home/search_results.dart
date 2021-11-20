@@ -1,4 +1,4 @@
-import 'package:telescope/home/yexter_content.dart';
+import 'package:telescope/cards/yexter_content.dart';
 
 enum SearchResultStatus {
   NOT_AVAILABLE,

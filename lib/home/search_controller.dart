@@ -3,8 +3,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:rxdart/subjects.dart';
+import 'package:telescope/cards/yexter_content.dart';
 import 'package:telescope/home/search_results.dart';
-import 'package:telescope/home/yexter_content.dart';
 import 'package:telescope/secure/constants.dart';
 import 'package:http/http.dart' as http;
 

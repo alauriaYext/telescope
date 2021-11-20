@@ -5,7 +5,7 @@ class ContentSkeleton extends StatefulWidget {
   final int _columnCount;
   final double _height;
 
-  ContentSkeleton({int columnCount = 1, double height = 75})
+  ContentSkeleton({int columnCount = 1, double height = 175})
       : _columnCount = columnCount,
         _height = height;
 
