@@ -47,3 +47,10 @@ app.*.map.json
 
 # Custom
 /lib/secure/constants.dart
+**/ios/Flutter/Flutter *.podspec
+**/ios/Flutter/.last_build_id
+ios/build/
+ios/Flutter/Generated *.xcconfig
+ios/Flutter/flutter_export_environment *.sh
+/build*
+.packages*
