@@ -4,6 +4,7 @@ import 'package:telescope/components/content_skeleton.dart';
 import 'package:telescope/home/search_controller.dart';
 import 'package:telescope/home/search_results.dart';
 import 'package:telescope/device/device_util.dart';
+import 'package:telescope/style_guide/text_styles.dart';
 
 class SearchContent extends StatelessWidget {
   final SearchResults? _results;
@@ -58,6 +59,16 @@ class SearchContent extends StatelessWidget {
   }
 
   Widget buildResultContent(SearchResults results) {
+    if (results.results.isEmpty) {
+      return Align(
+        alignment: Alignment(0.0, -0.2),
+        child: Text(
+          'No Results :(',
+          style: TextStyles.textXL.offWhite(),
+        ),
+      );
+    }
+
     List<Widget> rows = [];
     List<Widget> currentRowItems = [];
     int itemsPerRow = DeviceUtil.isMobile() ? 1 : 2;
