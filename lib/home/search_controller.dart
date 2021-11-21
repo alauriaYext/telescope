@@ -9,16 +9,14 @@ import 'package:telescope/secure/constants.dart';
 import 'package:http/http.dart' as http;
 
 class SearchController {
-  static const animationDuration = 200;
+  static const animationDuration = 350;
   final TextEditingController _queryController;
   final FocusNode _focusNode;
-  final BehaviorSubject<String> _querySubject;
   final BehaviorSubject<SearchResults> _resultSubject;
 
   SearchController()
       : _queryController = TextEditingController(),
         _focusNode = FocusNode(),
-        _querySubject = BehaviorSubject(),
         _resultSubject = BehaviorSubject.seeded(SearchResults.notAvailable()) {
     _focusNode.requestFocus();
   }
@@ -27,13 +25,13 @@ class SearchController {
   Stream<SearchResults> get resultStream => _resultSubject.stream;
 
   search(String input) {
-    int delayMs = 0;
+    double delayMs = 0;
     if (_resultSubject.valueWrapper?.value.status ==
         SearchResultStatus.NOT_AVAILABLE) {
       _resultSubject.add(SearchResults.animating());
-      delayMs = animationDuration;
+      delayMs = animationDuration * 0.35;
     }
-    Timer(Duration(milliseconds: delayMs), () {
+    Timer(Duration(milliseconds: delayMs.toInt()), () {
       _resultSubject.add(SearchResults.loading());
     });
     String request =

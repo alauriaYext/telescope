@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
                   flex: 35,
                   child: Align(
                     alignment: Alignment.topCenter,
-                    child: SettingsBar(),
+                    // child: SettingsBar(),
                   ),
                 ),
                 Row(
@@ -65,10 +65,15 @@ class HomeScreen extends StatelessWidget {
                     return AnimatedContainer(
                       duration: Duration(
                           milliseconds: SearchController.animationDuration),
+                      curve: Curves.easeOut,
                       height: isAvailable ? maxHeight * 0.7 : 0,
-                      child: isAvailable
-                          ? SearchContent(results: snapshot.data)
-                          : Container(),
+                      child: AnimatedOpacity(
+                        duration: Duration(
+                            milliseconds: SearchController.animationDuration),
+                        curve: Curves.easeOut,
+                        opacity: isAvailable ? 1.0 : 0.0,
+                        child: SearchContent(results: snapshot.data),
+                      ),
                     );
                   },
                 ),
