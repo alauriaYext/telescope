@@ -89,7 +89,11 @@ class SearchContent extends StatelessWidget {
           currentRowItems = [];
         }
       }
-      if (currentRowItems.length > 0) {
+      int lastRowItemCount = currentRowItems.length;
+      if (lastRowItemCount > 0) {
+        for (int i = 0; i < itemsPerRow - lastRowItemCount; i++) {
+          currentRowItems.add(Spacer());
+        }
         rows.add(Row(children: currentRowItems));
       }
       return ListView.builder(
