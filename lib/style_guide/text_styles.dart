@@ -16,8 +16,8 @@ class TextStyles {
   static TextStyle textXL = baseStyle.copyWith(fontSize: 20);
   static TextStyle textL = baseStyle.copyWith(fontSize: 18);
   static TextStyle textM = baseStyle.copyWith(fontSize: 16);
-  static TextStyle textS = baseStyle.copyWith(fontSize: 12);
-  static TextStyle textXS = baseStyle.copyWith(fontSize: 10);
+  static TextStyle textS = baseStyle.copyWith(fontSize: 13);
+  static TextStyle textXS = baseStyle.copyWith(fontSize: 11);
 }
 
 extension TextStyleExtension on TextStyle {

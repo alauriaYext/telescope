@@ -16,45 +16,39 @@ class SearchBox extends StatelessWidget {
         color: Palette.offWhite,
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 2.0,
-          horizontal: 6.0,
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: TextField(
-                  controller: _controller.queryController,
-                  autofocus: true,
-                  cursorColor: Palette.gray10,
-                  maxLines: 1,
-                  style: TextStyles.textXL,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'Search',
-                  ),
-                  onSubmitted: _controller.search,
+      child: Row(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: TextField(
+                controller: _controller.queryController,
+                autofocus: true,
+                cursorColor: Palette.gray10,
+                maxLines: 1,
+                style: TextStyles.textXL,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Search',
                 ),
+                onSubmitted: _controller.search,
               ),
             ),
-            GenericButton(
-              onTap: () {
-                _controller.search(_controller.queryController.text);
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Icon(
-                  Icons.search,
-                  size: 34,
-                  color: Palette.gray10,
-                ),
+          ),
+          GenericButton(
+            onTap: () {
+              _controller.search(_controller.queryController.text);
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Icon(
+                Icons.search,
+                size: 34,
+                color: Palette.gray10,
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

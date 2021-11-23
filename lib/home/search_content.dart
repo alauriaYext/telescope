@@ -1,9 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:telescope/cards/search_result_card.dart';
 import 'package:telescope/components/content_skeleton.dart';
 import 'package:telescope/home/search_controller.dart';
 import 'package:telescope/home/search_results.dart';
 import 'package:telescope/device/device_util.dart';
+import 'package:telescope/style_guide/palette.dart';
 import 'package:telescope/style_guide/text_styles.dart';
 
 class SearchContent extends StatelessWidget {
@@ -39,8 +42,8 @@ class SearchContent extends StatelessWidget {
     List<Widget> items = [];
     items.add(ContentSkeleton(columnCount: 4));
     items.add(ContentSkeleton());
-    items.add(ContentSkeleton());
     items.add(ContentSkeleton(columnCount: 2));
+    items.add(ContentSkeleton());
     items.add(ContentSkeleton());
     items.add(ContentSkeleton(columnCount: 2));
     items.add(ContentSkeleton());
@@ -51,7 +54,10 @@ class SearchContent extends StatelessWidget {
     return MediaQuery.removePadding(
       context: context,
       removeTop: true,
-      child: ListView(children: items),
+      child: ListView(
+        padding: buildListPadding(),
+        children: items,
+      ),
     );
   }
 
@@ -66,30 +72,40 @@ class SearchContent extends StatelessWidget {
       );
     }
 
-    List<Widget> rows = [];
-    List<Widget> currentRowItems = [];
-    int itemsPerRow = DeviceUtil.isMobile() ? 1 : 2;
-    for (SearchResult searchResult in results.results) {
-      SearchResultCard card = SearchResultCard(searchResult);
-      currentRowItems.add(Expanded(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: card,
-        ),
-      ));
-      if (currentRowItems.length == itemsPerRow) {
-        rows.add(Row(children: currentRowItems));
-        currentRowItems = [];
+    return LayoutBuilder(builder: (_, constraints) {
+      List<Widget> rows = [];
+      List<Widget> currentRowItems = [];
+      int itemsPerRow = max(constraints.maxWidth ~/ 295, 1);
+      for (SearchResult searchResult in results.results) {
+        SearchResultCard card = SearchResultCard(searchResult);
+        currentRowItems.add(Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: card,
+          ),
+        ));
+        if (currentRowItems.length == itemsPerRow) {
+          rows.add(Row(children: currentRowItems));
+          currentRowItems = [];
+        }
       }
-    }
-    if (currentRowItems.length > 0) {
-      rows.add(Row(children: currentRowItems));
-    }
-    return ListView.builder(
-      itemCount: rows.length,
-      itemBuilder: (_, index) {
-        return index < rows.length ? rows[index] : Container();
-      },
-    );
+      if (currentRowItems.length > 0) {
+        rows.add(Row(children: currentRowItems));
+      }
+      return ListView.builder(
+        padding: buildListPadding(),
+        itemCount: rows.length,
+        itemBuilder: (_, index) {
+          if (index >= rows.length) {
+            return Container();
+          }
+          return rows[index];
+        },
+      );
+    });
+  }
+
+  EdgeInsets buildListPadding() {
+    return EdgeInsets.only(top: 65, bottom: 20, left: 4, right: 4);
   }
 }
