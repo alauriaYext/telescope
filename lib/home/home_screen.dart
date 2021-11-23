@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:telescope/home/search_box.dart';
 import 'package:telescope/home/search_container.dart';
-import 'package:telescope/home/search_content.dart';
+import 'package:telescope/home/search_result_content.dart';
 import 'package:telescope/home/search_controller.dart';
 import 'package:telescope/home/search_results.dart';
 import 'package:telescope/home/settings_bar.dart';

@@ -5,13 +5,11 @@ import 'package:telescope/cards/search_result_card.dart';
 import 'package:telescope/components/content_skeleton.dart';
 import 'package:telescope/home/search_controller.dart';
 import 'package:telescope/home/search_results.dart';
-import 'package:telescope/device/device_util.dart';
-import 'package:telescope/style_guide/palette.dart';
 import 'package:telescope/style_guide/text_styles.dart';
 
-class SearchContent extends StatelessWidget {
+class SearchResultContent extends StatelessWidget {
   final SearchResults? _results;
-  SearchContent({SearchResults? results}) : _results = results;
+  SearchResultContent({SearchResults? results}) : _results = results;
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:telescope/home/search_box.dart';
-import 'package:telescope/home/search_content.dart';
 import 'package:telescope/home/search_controller.dart';
+import 'package:telescope/home/search_result_content.dart';
 import 'package:telescope/home/search_results.dart';
 
 class SearchContainer extends StatelessWidget {
@@ -27,7 +27,7 @@ class SearchContainer extends StatelessWidget {
                       milliseconds: SearchController.animationDuration),
                   curve: Curves.easeOut,
                   opacity: isAvailable ? 1.0 : 0.0,
-                  child: SearchContent(results: snapshot.data),
+                  child: SearchResultContent(results: snapshot.data),
                 );
               },
             ),
